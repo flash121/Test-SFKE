@@ -17,10 +17,13 @@ from uploaddb import connect_c #connect mongodb socket:
 
 class KeyWordIndex():
     def __init__(self,keyword='none',type='word'):
-        self.db=connect_c('facebook','train','localhost',27017)
+        try:
+            self.db=connect_c('facebook','train','localhost',27017)
+        except RuntimeError:
+            print "Can not connect to database"
         if(type=='word'):
             try:
-                self.keyword=keyword.split('')
+                self.keyword=keyword.split()
             except ValueError:
                 print "keyword Read failure from string"
         if(type=='file'):
@@ -28,14 +31,16 @@ class KeyWordIndex():
                 self.keyword=open(keyword,'r').read().split('')
             except ValueError:
                 print "keyword Read failure from file"
+    
     def Query(self):
         print "Processing Query: "
-        f=open(out,'w')
-        docs=self.db.find({"Tags": {"$regex" : self.keyword}},{"Id" : 1})
-        for doc,k in enumerate(docs):
-            if k%1000==0:
-                print "Prcoessing "+k+"th Document" 
-            f.write(str(doc['Id'])+'\n')
+        for key in self.keyword:
+            f=open(key,'w')
+            docs=self.db.find({"Tags": {"$regex" : self.keyword}},{"Id" : 1})
+            for k,doc in enumerate(docs):
+                if k%1000==0:
+                    print "Prcoessing "+str(k)+"th Document" 
+                f.write(str(doc['Id'])+'\n')
             
    
     

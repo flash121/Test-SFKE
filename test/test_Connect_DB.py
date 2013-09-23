@@ -5,7 +5,14 @@ Created on 2013-9-22
 
 This is the test function for test test_Connect_DB.py
 
-I will try to use example string='php' and a file example to do this task
+I will try to use example string='php' and a file exaple to do this task
 '''
 
+from Connect_DB import KeyWordIndex
 
+
+#import target test file:
+
+
+test_model=KeyWordIndex('php','word')
+test_model.Query()
