@@ -8,7 +8,7 @@ This is the test function for test test_Connect_DB.py
 I will try to use example string='php' and a file exaple to do this task
 '''
 
-from Connect_DB import KeyWordIndex
+from Read_Raw import KeyWordIndex
 
 
 #import target test file:
