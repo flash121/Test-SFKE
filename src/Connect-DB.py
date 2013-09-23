@@ -36,7 +36,8 @@ class KeyWordIndex():
             if k%1000==0:
                 print "Prcoessing "+k+"th Document" 
             f.write(str(doc['Id'])+'\n')
-    
+            
+   
     
 
 
