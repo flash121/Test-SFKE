@@ -36,7 +36,7 @@ class KeyWordIndex():
         print "Processing Query: "
         for key in self.keyword:
             f=open(key,'w')
-            docs=self.db.find({"Tags": {"$regex" : self.keyword}},{"Id" : 1})
+            docs=self.db.find({"Tags": {"$regex" : key}})
             for k,doc in enumerate(docs):
                 if k%1000==0:
                     print "Prcoessing "+str(k)+"th Document" 
