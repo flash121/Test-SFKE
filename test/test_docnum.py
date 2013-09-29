@@ -14,5 +14,5 @@ from Read_Raw import KeyWordIndex
 #import target test file:
 
 
-test_model=KeyWordIndex('php','word')
+test_model=KeyWordIndex('dict.kw','file')
 test_model.Query()
