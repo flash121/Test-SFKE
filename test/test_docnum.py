@@ -15,4 +15,6 @@ from Read_Raw import KeyWordIndex
 
 
 test_model=KeyWordIndex('dict.kw','file')
-test_model.Query()
+#test_model.Query()
+s=test_model.Check()
+test_model.Query(s)
