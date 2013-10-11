@@ -17,7 +17,6 @@ class webbook():
         self.style=memory
         self.maxitem=maxitem
         self.len=0
-        self.set=[open(dir+'1.dat','r'),open(dir+'2.dat','r'),open(dir+'3.dat','r'),open(dir+'4.dat','r'),open(dir+'5.dat','r'),open(dir+'6.dat','r')]
         self.loc=1
         self.dict={"1.dat" : [],"2.dat" : [],"3.dat" : [],"4.dat" : [],"5.dat" : [],"6.dat" : []}
     def __getitem__(self):
@@ -43,9 +42,11 @@ class webbook():
     def __len__(self):
         return self.len
     def read_keyword(self,key):
-        f=open('D:\\Stack Flow\\test\\key\\'+key+'.key')
-        self.doc=f.read().split('\n')
-        self.len=len(self.doc)
+        f=open('D:\\Stack Flow\\test\\keyword\\'+str(key)+'.key')
+        self.loc=f.read().split('\n')
+        self.loc=[int(num) for num in self.loc if num != '']
+        self.len=len(self.loc)
+        self.key=key
     def index_assign(self,ind):
         '''
         index start from 1
@@ -53,9 +54,24 @@ class webbook():
         return [(str(ins/1008000+1)+'.dat', ins%1008000) for ins in ind]
     def back_jobs_translation(self):
         pass
+    def basic_read(self,name,ind):
+        f=open(name,'r')
+        return [u.split() for i,u in enumerate(f) if(i+1 in ind)]
+    def basic_group(self,indx,tar):
+        return tar,[u[1] for u in indx if u[0]==tar]
     def read(self):
-        name=self.index_assign(self.doc[self.loc])
-        self.loc+=1
-        return open(name(0),'r')[name(1)]
+        read_pack=self.index_assign(self.loc)
+        content=[]
+        for p in self.dict.keys():
+            pack_ind=self.basic_group(read_pack,p)
+            content.extend(self.basic_read(self.directory+'\\'+p,pack_ind[1]))
+            s="Read data:" + str(len(content))
+            logging.info(s)
+        d=gensim.corpora.Dictionary(content)
+        d.save("D:\\Stack Flow\\data\\dic\\"+str(self.key));
+        return d
+        
     
-    
+s=webbook()
+s.read_keyword(14)
+s.read()

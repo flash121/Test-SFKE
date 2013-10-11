@@ -1,0 +1,50 @@
+2013-10-10 19:19:04,823 : INFO : Read data:268
+2013-10-10 19:19:21,076 : INFO : Read data:537
+2013-10-10 19:19:29,701 : INFO : Read data:784
+2013-10-10 19:19:36,862 : INFO : Read data:1050
+2013-10-10 19:19:43,661 : INFO : Read data:1302
+2013-10-10 19:19:50,532 : INFO : Read data:1572
+2013-10-10 19:26:41,548 : INFO : Read data:268
+2013-10-10 19:26:47,716 : INFO : Read data:537
+2013-10-10 19:26:53,410 : INFO : Read data:784
+2013-10-10 19:26:59,436 : INFO : Read data:1050
+2013-10-10 19:27:05,207 : INFO : Read data:1302
+2013-10-10 19:27:11,309 : INFO : Read data:1572
+2013-10-10 19:27:11,309 : INFO : adding document #0 to Dictionary(0 unique tokens)
+2013-10-10 19:27:11,309 : INFO : built Dictionary(11 unique tokens) from 14 documents (total 14 corpus positions)
+2013-10-10 19:27:11,309 : INFO : saving Dictionary object to D:\Stack Flow\data\dic\14
+2013-10-10 19:28:24,966 : INFO : Read data:268
+2013-10-10 19:28:31,117 : INFO : Read data:537
+2013-10-10 19:28:36,875 : INFO : Read data:784
+2013-10-10 19:28:42,992 : INFO : Read data:1050
+2013-10-10 19:28:48,756 : INFO : Read data:1302
+2013-10-10 19:28:54,888 : INFO : Read data:1572
+2013-10-10 19:28:54,888 : INFO : adding document #0 to Dictionary(0 unique tokens)
+2013-10-10 19:28:54,888 : INFO : built Dictionary(11 unique tokens) from 14 documents (total 14 corpus positions)
+2013-10-10 19:28:54,888 : INFO : saving Dictionary object to D:\Stack Flow\data\dic\14
+2013-10-10 19:31:11,746 : INFO : Read data:268
+2013-10-10 19:31:17,770 : INFO : Read data:537
+2013-10-10 19:31:23,446 : INFO : Read data:784
+2013-10-10 19:31:29,464 : INFO : Read data:1050
+2013-10-10 19:31:35,236 : INFO : Read data:1302
+2013-10-10 19:31:41,331 : INFO : Read data:1572
+2013-10-10 19:31:41,331 : INFO : adding document #0 to Dictionary(0 unique tokens)
+2013-10-10 19:31:41,331 : INFO : built Dictionary(11 unique tokens) from 14 documents (total 14 corpus positions)
+2013-10-10 19:31:41,331 : INFO : saving Dictionary object to D:\Stack Flow\data\dic\14
+2013-10-10 19:32:20,173 : INFO : Read data:268
+2013-10-10 19:32:26,454 : INFO : Read data:537
+2013-10-10 19:32:32,267 : INFO : Read data:784
+2013-10-10 19:32:38,407 : INFO : Read data:1050
+2013-10-10 19:32:44,309 : INFO : Read data:1302
+2013-10-10 19:32:50,582 : INFO : Read data:1572
+2013-10-10 19:32:50,582 : INFO : adding document #0 to Dictionary(0 unique tokens)
+2013-10-10 19:32:50,582 : INFO : built Dictionary(11 unique tokens) from 14 documents (total 14 corpus positions)
+2013-10-10 19:33:29,618 : INFO : Read data:268
+2013-10-10 19:33:35,780 : INFO : Read data:537
+2013-10-10 19:33:41,509 : INFO : Read data:784
+2013-10-10 19:33:47,553 : INFO : Read data:1050
+2013-10-10 19:33:53,348 : INFO : Read data:1302
+2013-10-10 19:33:59,489 : INFO : Read data:1572
+2013-10-10 19:33:59,489 : INFO : adding document #0 to Dictionary(0 unique tokens)
+2013-10-10 19:33:59,641 : INFO : built Dictionary(11516 unique tokens) from 1572 documents (total 83858 corpus positions)
+2013-10-10 19:33:59,641 : INFO : saving Dictionary object to D:\Stack Flow\data\dic\14
