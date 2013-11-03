@@ -78,13 +78,15 @@ class webbook():
                     f=open(self.directory+"kdoc\\"+str(self.BigTable[word])+".kdoc",'a+')
                     f.write(doc+" ")
                     f.close()
-    def CleanWord(self):
-"""
+        """
         Work: 2013/9  Forget >_< 
         name=self.index_assign(self.doc[self.loc])
         self.loc+=1
         return open(name(0),'r')[name(1)]
         """
+   
+    def CleanWord(self):
+        pass
 """
 Test Case: (CreateBigTable)
 """    
