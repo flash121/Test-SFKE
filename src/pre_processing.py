@@ -6,7 +6,6 @@ Created on 2013-9-29
 Tags: Pre-processing raw data, eliminate stop-word and useless parts
 '''
 import logging
-import itertools
 from gensim import *
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', filename='web_book.log',level=logging.INFO)
@@ -19,7 +18,7 @@ class webbook():
         self.len=0
         self.set=[open(dir+'1.dat','r'),open(dir+'2.dat','r'),open(dir+'3.dat','r'),open(dir+'4.dat','r'),open(dir+'5.dat','r'),open(dir+'6.dat','r')]
         self.loc=1
-        self.keyindcate=open("F:\\tags.csv",'r')
+        self.keyindcate=open(dir+"tags.csv",'r')
         self.keyindcate.readline()
     def __getitem__(self):
         if(self.style=='friendly'):
@@ -97,4 +96,4 @@ x.CreateBigTable();
 """
 Test Case: (WriteBigFile)
 """    
-#x.WriteBigFile()
+x.WriteBigFile()
