@@ -3,8 +3,10 @@ Created on 2013-11-5
 
 @author: yfeng
 '''
+import json
 import gensim
 from gensim import corpora
+from numpy import *
 
 class ClassiferMachine(object):
     '''
@@ -25,12 +27,15 @@ class ClassiferMachine(object):
         '''
         self.doc=None if doc is None else doc
         self.n=n
-        self.dict=corpora.Dictionary.load(dirs+"facebook.dict")
-        self.corpora=self.doc2cor(self.doc)
-        self.fin=0
+        self.dir=dirs
         self.stopword=self.stopword=open(dirs+"stopword.txt",'r').read().split('\n')
+        self.dict=corpora.Dictionary.load(dirs+"facebook.dict")
+        self.corpora=self.doc2cor()
+        self.fin=0
+        self.tag=corpora.Dictionary.load(dirs+"Keyword.dict")
+        
     def load_corpora(self,cor):
-        pass 
+        self.corpora=cor
     def put(self,doc):
         '''
         put function  input is document, and it will store this document in the class
@@ -41,7 +46,21 @@ class ClassiferMachine(object):
         '''
         get function is the main function to extract tag
         '''
-        pass
+        self.points={}
+        for i in range(0,42048):
+            point=0
+            if(self.tag[i]=="python"):
+                point=point
+            with open(self.dir+"json\\"+str(i)+".json") as f:
+                data=json.load(f)
+            for u,v in self.corpora:
+                try: 
+                    point=point+data[str(u)]*v
+                except:
+                    point=point+20000*v
+            self.points[i]=(point+0.0)/len(self.corpora)
+            if(i%100==0): 
+                print i
     def getdoc(self):
         '''
         to return document
@@ -56,10 +75,27 @@ class ClassiferMachine(object):
             return []
         else:
             return self.dict.doc2bow([w for w in self.doc.split() if w not in self.stopword and w[0].isalpha() == True])
-        
     def __getitem__(self,doc):
-        return  "" % () if self.fin==1 else "" % ()
-    def __str__(self):
-        return 
-    def show(self):
         pass
+    def __str__(self):
+        return  "" % () if self.fin==1 else "" % ()
+    def show(self):
+        temp=array(sorted(self.points,key=self.points.get,reverse=False))
+        print [(self.tag[u],u) for u in temp[0:self.n]]
+
+
+'''
+Test Code: 
+Case 1: __init__
+Status: S 
+'''
+
+x=ClassiferMachine()
+x=ClassiferMachine("I have found that when the following is run python json module included since converts int dictionary keys to string Is there any easy way to preserve the key as an int without needing to parse the string on dump and load. I believe it would be possible using the hooks provided by the json module but again this still requires parsing Is there possibly an argument I have overlooked cheers chaz")
+'''
+Test Code:
+Case 2: extract()
+Status: W
+'''    
+x.extract()
+x.show()
