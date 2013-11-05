@@ -49,7 +49,7 @@ class ClassiferMachine(object):
         self.points={}
         for i in range(0,42048):
             point=0
-            if(self.tag[i]=="python"):
+            if(self.tag[i]=="json"):
                 point=point
             with open(self.dir+"json\\"+str(i)+".json") as f:
                 data=json.load(f)
