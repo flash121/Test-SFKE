@@ -15,7 +15,7 @@ class SelfCluster(object):
     The cluster feature vector for each keyword:
     The key place to store information of context from keyword
     '''
-    def __init__(self,name,dirs="D:\\Stack Flow\\data\\",n=200):
+    def __init__(self,name,dirs="D:\\Stack Flow\\data\\",n=200,flag=False):
         '''
         given a bias -n for extract IDF smallest 200 words
               dir of file
@@ -38,6 +38,11 @@ class SelfCluster(object):
         self.cod_context=[self.dict.doc2bow(doc) for doc in self.context]
         self.model=TfidfModel(self.cod_context)
         self.tf=TfidfModel(dictionary=self.dict)
+        self.mixture={}
+        self.flag=flag
+        if(flag):
+            self.idfs()
+            self.tfs()        
         
     def idfs(self):
         '''
@@ -61,6 +66,7 @@ class SelfCluster(object):
         result: self.tf_dict  key: each word index, value: the rank of this word - tf decrease
         '''
         temp=self.dict.doc2bow([w for w in self.raw.split() if w not in self.stopword and w[0].isalpha() == True ])
+        self.n=min(self.n,len(temp))
         tf_score=self.tf[temp]
         tf_dict={}
         for u,v in tf_score:
@@ -76,13 +82,16 @@ class SelfCluster(object):
         '''
         Key function of this class, generated mixture rank for each word in the Big dictionary, and we can use it to determine the cluster of a keyword
         '''
-        self.mixture={}
         for k in self.idf_rank.keys():
             self.mixture[k]=(self.idf_rank[k]+self.tf_dict[k]+0.0)/2
         return sorted(self.mixture,key=self.mixture.get,reverse=False);
     def __str__(self):
-        return "Keyword: %s Id: %s \n IDFModel(num_docs=%s, num_nnz=%s)\n TFModel(num_docs=%s, num_nnz=%s)" % (self.tag,self.id,self.model.num_docs, self.model.num_nnz,self.tf.num_docs, self.tf.num_nnz) 
-    def show(self,t):
+        if self.flag==True:
+            return "Keyword: %s Id: %s \n IDFModel(num_docs=%s, num_nnz=%s)\n TFModel(num_docs=%s, num_nnz=%s)\n Dictionary: %s" % (self.tag,self.id,self.model.num_docs, self.model.num_nnz,self.tf.num_docs, self.tf.num_nnz,str(self.get(self.mixtureRank()))) 
+        else:
+            return "Keyword: %s Id: %s \n IDFModel(num_docs=%s, num_nnz=%s)\n TFModel(num_docs=%s, num_nnz=%s)\n Dictionary: %s" % (self.tag,self.id,self.model.num_docs, self.model.num_nnz,self.tf.num_docs, self.tf.num_nnz,"Unavailable") 
+            
+    def get(self,t):
         return [self.dict[u] for u in t]
     def save(self):
         with open(self.dir+"\\json\\"+str(self.id)+'.json', 'w') as f:
@@ -90,14 +99,16 @@ class SelfCluster(object):
     def load(self):
         with open(self.dir+"\\json\\"+str(self.id)+'.json') as f:
             json.load(self.mixture, f)
-
+    def show(self):
+        temp=array(sorted(self.mixture,key=self.mixture.get,reverse=False))
+        print [self.dict[u] for u in temp[0:self.n]]
 
 '''
 Test Situation
 1st construction function: S
 '''
 print "Start Test..."
-a=SelfCluster("23210.kdoc")
+a=SelfCluster("36571.kdoc",flag=False)
 print "Success"
 print a
 '''
@@ -128,4 +139,4 @@ print d
 '''
 t1=a.idfs()
 t2=a.tfs()
-#print a.get(a.mixtureRank())
+print a.get(a.mixtureRank())
