@@ -107,10 +107,12 @@ class SelfCluster(object):
 Test Situation
 1st construction function: S
 '''
+'''
 print "Start Test..."
 a=SelfCluster("36571.kdoc",flag=False)
 print "Success"
 print a
+'''
 '''
 Test Situation 
 2nd Generate idf-sorted collection: S
@@ -137,6 +139,8 @@ print "Start TF-IDF in whole database calucating: "
 d=a.tfs()
 print d
 '''
+'''
 t1=a.idfs()
 t2=a.tfs()
 print a.get(a.mixtureRank())
+'''
