@@ -92,7 +92,8 @@ class SelfCluster(object):
             return "Keyword: %s Id: %s \n IDFModel(num_docs=%s, num_nnz=%s)\n TFModel(num_docs=%s, num_nnz=%s)\n Dictionary: %s" % (self.tag,self.id,self.model.num_docs, self.model.num_nnz,self.tf.num_docs, self.tf.num_nnz,"Unavailable") 
             
     def get(self,t):
-        return [self.dict[u] for u in t]
+        t=array(t)
+        return [self.dict[u] for u in t[0:self.n]]
     def save(self):
         with open(self.dir+"\\json\\"+str(self.id)+'.json', 'w') as f:
             json.dump(self.mixture, f)
