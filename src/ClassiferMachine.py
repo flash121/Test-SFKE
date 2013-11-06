@@ -6,7 +6,7 @@ Created on 2013-11-5
 import json
 import gensim
 from gensim import corpora
-from numpy import *
+from numpy import array
 
 class ClassiferMachine(object):
     '''
