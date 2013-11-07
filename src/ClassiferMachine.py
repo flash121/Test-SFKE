@@ -89,13 +89,13 @@ Test Code:
 Case 1: __init__
 Status: S 
 '''
-
-x=ClassiferMachine()
-x=ClassiferMachine("I have found that when the following is run python json module included since converts int dictionary keys to string Is there any easy way to preserve the key as an int without needing to parse the string on dump and load. I believe it would be possible using the hooks provided by the json module but again this still requires parsing Is there possibly an argument I have overlooked cheers chaz")
+if __name__ == '__main__':
+    x=ClassiferMachine()
+    x=ClassiferMachine("I have found that when the following is run python json module included since converts int dictionary keys to string Is there any easy way to preserve the key as an int without needing to parse the string on dump and load. I believe it would be possible using the hooks provided by the json module but again this still requires parsing Is there possibly an argument I have overlooked cheers chaz")
+    x.extract()
+    x.show()
 '''
 Test Code:
 Case 2: extract()
 Status: W
 '''    
-x.extract()
-x.show()
