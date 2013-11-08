@@ -8,6 +8,7 @@ import gensim
 from gensim import corpora
 from numpy import array
 
+
 class ClassiferMachine(object):
     '''
     This is the main class for classification a document, which tag is most accuarcy to describe it
@@ -84,18 +85,57 @@ class ClassiferMachine(object):
         print [(self.tag[u],u) for u in temp[0:self.n]]
 
 
+class ImpressFactor(ClassiferMachine):
+    def __init__(self,dir="D:\\Stack Flow\\data\\",flag=False):
+        '''
+        flag to control fit or not
+        '''
+        ClassiferMachine.__init__(self,doc=None,n=5,dirs="D:\\Stack Flow\\data\\")
+        self.dir=dir
+        if flag:
+            self.book2={}
+            self.book={}
+        else:
+            with open(self.dir+'bwrank.book') as f:
+                self.book2=json.load(f)
+    def fit(self):
+        '''
+        fit the model from all documents in dir\json, take a lot of time
+        '''
+        
+        for i in range(0,20000):
+            self.book[str(i)]=[0,0]
+        for i in range(0,42048):
+            with open(self.dir+"json\\"+str(i)+".json") as f:
+                data=json.load(f)
+            for k in data.keys():
+                self.book[k]=[self.book[k][0]+data[k],self.book[k][1]+1]
+            print i
+        temp={}
+        for k in self.book.keys():
+            temp[k]=(self.book[k][0]+0.0)/(self.book[k][1] if self.book[k][1] is not 0 else 1) 
+        self.book2=temp
+        return 1
+    def write(self):
+        with open(self.dir+'relative.book', 'w') as f:
+            json.dump(self.book, f)
+        with open(self.dir+'bwRank.book', 'w') as f:
+            json.dump(self.book2, f)
+        return 1    
+    def eval(self,keypair):  
+        '''
+        keypair=[key_id, rank]
+        return the distance between average rank and its current rank to show this word's impressive degree
+        '''
+        return (0 if (keypair[1]-self.book2[str(keypair[0])])>0 else (self.book2[str(keypair[0])]-keypair[1]))/self.book2[str(keypair[0])]
+    
+
+
+
+    
 '''
 Test Code: 
 Case 1: __init__
 Status: S 
 '''
-if __name__ == '__main__':
-    x=ClassiferMachine()
-    x=ClassiferMachine("I have found that when the following is run python json module included since converts int dictionary keys to string Is there any easy way to preserve the key as an int without needing to parse the string on dump and load. I believe it would be possible using the hooks provided by the json module but again this still requires parsing Is there possibly an argument I have overlooked cheers chaz")
-    x.extract()
-    x.show()
-'''
-Test Code:
-Case 2: extract()
-Status: W
-'''    
+   

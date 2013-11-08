@@ -4,7 +4,8 @@ Created on 2013-11-5
 @author: yfeng
 '''
 import json
-import ClassiferMachine
+from ClassiferMachine import ClassiferMachine
+from ClassiferMachine import ImpressFactor
 from numpy import array
 import numpy
 class BasicView(object):
@@ -17,7 +18,7 @@ class BasicView(object):
         '''
         self.n=n
         self.dir=dirs
-        self.tar=ClassiferMachine.ClassiferMachine(doc)
+        self.tar=ClassiferMachine(doc)
         if word is not None:
             self.word=word
             self.tag=tag
@@ -50,10 +51,10 @@ class BasicView(object):
         print top n words in json
         '''
         return "Keyword: "+self.tar.tag[self.tagid]+" "+str(self.selectTop(self.n))
-    def convertWord(self):
-        return self.tar.dict.doc2bow([self.word])[0][0]
-    def convertTag(self):
-        return self.tar.tag.doc2bow([self.tag])[0][0]
+    def convertWord(self,word=None): 
+        return self.tar.dict.doc2bow([self.word])[0][0] if word is None else self.tar.dict.doc2bow([word])[0][0]
+    def convertTag(self,tag=None):
+        return self.tar.tag.doc2bow([self.tag])[0][0] if tag is None else self.tar.tag.doc2bow([tag])[0][0]
     def TextkeySort(self, flag=True):
         Text={}
         for a in self.tar.corpora:
@@ -69,12 +70,14 @@ class BasicView(object):
 #print x.selectTop(100)
 #print x.TextkeySort(flag=False)
 point=[]
+b=ImpressFactor()
 for i in range(0,500):
-    if i==38:
-        i=38
-    x=BasicView(n=6,wid=4173,tagid=i,doc="I have found that when the following is run python json module included since converts int dictionary keys to string Is there any easy way to preserve the key as an int without needing to parse the string on dump and load. I believe it would be possible using the hooks provided by the json module but again this still requires parsing Is there possibly an argument I have overlooked cheers chaz")
+    if i==359:
+        i=359
+    x=BasicView(n=4,wid=4173,tagid=i,doc="I have found that when the following is run python json module included since converts int dictionary keys to string Is there any easy way to preserve the key as an int without needing to parse the string on dump and load. I believe it would be possible using the hooks provided by the json module but again this still requires parsing Is there possibly an argument I have overlooked cheers chaz")
     p=x.TextkeySort(flag=False)
-    point.append(array([s[2] for s in p]).sum())
+    q=[b.eval([x.convertWord(s[0]),s[2]]) for s in p]
+    point.append(array(q).sum())
     print i
 array=array(point)
 temp = array.argsort()
